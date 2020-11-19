@@ -1,11 +1,25 @@
-'@context':
-  created: schema:dateCreated
-  schema: http://schema.org/
-  name: schema:name
-  updated: schema:dateUpdated
-  version: schema:schemaVersion
-'@type': schema:Project
-created: 2020-03-03T10:08:16.332Z
-name: Streetwise
-updated: 2020-03-03T10:08:16.332Z
-version: '1'
+'@id': https://renkulab.io/projects/oleg/streetwise
+'@type':
+- http://schema.org/Project
+- http://www.w3.org/ns/prov#Location
+http://schema.org/agent: 0.12.1.dev0+dirty
+http://schema.org/creator:
+  '@id': mailto:oleg@datalets.ch
+  '@type':
+  - http://schema.org/Person
+  - http://www.w3.org/ns/prov#Person
+  http://schema.org/affiliation: null
+  http://schema.org/alternateName: null
+  http://schema.org/email: oleg@datalets.ch
+  http://schema.org/name: Oleg Lavrovsky
+  http://www.w3.org/2000/01/rdf-schema#label: Oleg Lavrovsky
+http://schema.org/dateCreated: '2020-03-03T10:08:16.332000+00:00'
+http://schema.org/name: Streetwise
+http://schema.org/schemaVersion: '8'
+https://swissdatasciencecenter.github.io/renku-ontology#automatedTemplateUpdate: false
+https://swissdatasciencecenter.github.io/renku-ontology#immutableTemplateFiles: []
+https://swissdatasciencecenter.github.io/renku-ontology#templateId: null
+https://swissdatasciencecenter.github.io/renku-ontology#templateMetadata: null
+https://swissdatasciencecenter.github.io/renku-ontology#templateReference: null
+https://swissdatasciencecenter.github.io/renku-ontology#templateSource: null
+https://swissdatasciencecenter.github.io/renku-ontology#templateVersion: null
