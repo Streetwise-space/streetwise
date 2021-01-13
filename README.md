@@ -2,7 +2,7 @@
 
 This is an open data science project compatible with the [Renku platform](https://renkulab.io).
 
-In additional to the `data` folder, you may wish [to download](https://streetwise.eu-central-1.linodeobjects.com/models.zip) an extract a `models` folder into the root in order to start with pre-trained networks.
+In additional to the `data` folder, you may wish [to download](https://streetwise.eu-central-1.linodeobjects.com/models.zip) an extract a `models` folder into the root in order to start with pre-trained networks. Alternatively, the code used to train the networks can be found in ```scripts/NN-training.py```.
 
 ## Background
 
