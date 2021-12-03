@@ -1,11 +1,14 @@
-from pymapillary import Mapillary
-from pymapillary.utils import *
-import wget
-import  libgeohash as gh
-import datetime
+#!/bin/python3
+# -*- coding: utf-8 -*-
 from dotenv import load_dotenv
+
+import mapillary.interface as mly
+
 import os
 import cv2
+import wget
+import libgeohash as gh
+import datetime
 import image_processing as imgp
 import pandas as pd
 
@@ -91,9 +94,11 @@ def download_image_by_key(key, image_resolution=320, download_path=None):
 ##*****************Main program ***************
 
 
-# We indicate the geohash 
-gh_cantons={"ZH":{"area_gh":"u0qj", "suffix":["d"]}
-            }
+# We indicate the geohash
+gh_cantons={
+        "SG":{"area_gh":"u0qt","suffix":["v3","v7","tx","ub","vu","su"]},
+        # "ZH":{"area_gh":"u0qj", "suffix":["d"]}
+    }
 
 #We get images from 2015 onwards
 start_date=datetime.datetime(2015,1,1)
@@ -116,9 +121,9 @@ for key_canton in gh_cantons.keys():
         #gh_urban = geohash_compl[area_canton]
         print(gh_urban)
         gh_box_map=convetBBoxtoMapillary(gh_urban)
-        #we query sequences because we don't want many similar images in one area     
-        # no limit is set as we want to query all images. 
-        
+        #we query sequences because we don't want many similar images in one area
+        # no limit is set as we want to query all images.
+
         raw_json = map.search_sequences(bbox=gh_box_map, start_time=start_date)
 
         # every feature is a sequence of pictues
@@ -135,5 +140,3 @@ for key_canton in gh_cantons.keys():
         area_canton+=1
 
 print("End of crawling")
-
-
