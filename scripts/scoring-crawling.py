@@ -7,10 +7,13 @@ import mapillary.interface as mly
 import os
 import cv2
 import wget
+import json
 import libgeohash as gh
 import datetime
 import image_processing as imgp
 import pandas as pd
+
+OUTPUT_FOLDER = "data/"
 
 def convetBBoxtoMapillary(geohash):
     """
@@ -25,12 +28,31 @@ def convetBBoxtoMapillary(geohash):
     return str(gh_bbox["w"])+","+str(gh_bbox["s"])+","+str(gh_bbox["e"])+","+str(gh_bbox["n"])
 
 
-def register_entry(image_keys, coord_list, key_canton, i, ir, image_angles, sequence_info):
+def getMapillaryBbox(geohash):
+    """
+    Converts a geohash into a string  representing the bounding box coordinates in this order:
+        Args:
+            geohash (string):Geohash whose bounding box we want to obtain e.g. u0qj9
+
+        Return:
+            (dict): a bounding box as a dictionary
+    """
+    gh_bbox = gh.bbox(geohash)
+    return {
+        "west":  gh_bbox["w"],
+        "south": gh_bbox["s"],
+        "east":  gh_bbox["e"],
+        "north": gh_bbox["n"]
+    }
+
+
+
+def register_entry(image_key, coord_list, key_canton, i, ir, image_angles, sequence_info):
     """
     Downloads an image from mapillary given the image key and registers the entry in an existing  csv file.
 
            Args:
-               image_keys (list):list containing mapillary iamge key from a sequence
+               image_key (int): a mapillary image key (from a sequence)
                coord_list (list): list of coordinates corresponding to the images sent in image_keys
                key_canton (string): represents the canton where the image belongs, to be registered in the CSV file
                i (int): index to be added to the image name
@@ -42,19 +64,27 @@ def register_entry(image_keys, coord_list, key_canton, i, ir, image_angles, sequ
                (int): the index used in the image name for the  images coming after this fucntion is executed
 
     """
-
-    index_image=0
+    datapath = os.path.join(OUTPUT_FOLDER, "scoring.csv")
+    index_image = 0
     while index_image < len(image_keys):
-        flag=download_image_by_key(image_keys[index_image], ir, "classification_zh/" + image_keys[index_image] + ".jpg")
+        filepath = os.path.join(OUTPUT_FOLDER, str(image_keys[index_image]) + ".jpg")
+        flag=download_image_by_key(image_keys[index_image], ir, filepath)
         if not flag:
-            myfile = open("data/zurich-scoring.csv", "a")
-            image_name=image_keys[index_image] + ".jpg"
-            line=",".join([image_keys[index_image], key_canton, str(coord_list[index_image][1]),
-                           str(coord_list[index_image][0]), str(image_angles[index_image]), sequence_info+"\n"])
+            myfile = open(datapath, "a")
+            image_name=str(image_keys[index_image]) + ".jpg"
+            line=",".join([
+                str(image_keys[index_image]), 
+                key_canton, 
+                str(coord_list[1]),
+                str(coord_list[0]), 
+                str(image_angles), 
+                sequence_info+"\n"
+            ])
             myfile.write(line)
             myfile.close()
-        index_image+= 1
-        i+=1
+        exit() ##############
+        index_image += 1
+        i += 1
 
     return i
 
@@ -76,6 +106,17 @@ def download_image_by_key(key, image_resolution=320, download_path=None):
     """
     if os.path.isfile(download_path):
         return True
+    
+    try:            
+        image_data = mly.image.get_image_thumbnail_controller(
+          image_id = key, 
+          resolution = 1024
+        )
+    except:
+        return False
+    
+    print(image_data)
+    
     # Check the image_resolution argument and create the url to download
     if image_resolution == 320:
         url = "https://images.mapillary.com/" + key + "/thumb-320.jpg"
@@ -87,7 +128,7 @@ def download_image_by_key(key, image_resolution=320, download_path=None):
         url = "https://images.mapillary.com/" + key + "/thumb-2048.jpg"
 
     # Use the wget library to download the url
-
+    print(url)
     filename = wget.download(url, download_path)
     return False
 
@@ -107,7 +148,7 @@ start_date=datetime.datetime(2015,1,1)
 load_dotenv()
 key = os.getenv("MAPILLARY_KEY")
 
-map = Mapillary(key)
+mly.set_access_token(key)
 
 #Used to name images
 i = 0
@@ -120,21 +161,37 @@ for key_canton in gh_cantons.keys():
         gh_urban=gh_cantons[key_canton]["area_gh"]+ gh_cantons[key_canton]["suffix"][area_canton]
         #gh_urban = geohash_compl[area_canton]
         print(gh_urban)
-        gh_box_map=convetBBoxtoMapillary(gh_urban)
+        
+        #gh_box_map=convetBBoxtoMapillary(gh_urban)
         #we query sequences because we don't want many similar images in one area
         # no limit is set as we want to query all images.
-
-        raw_json = map.search_sequences(bbox=gh_box_map, start_time=start_date)
+        #raw_json = map.search_sequences(bbox=gh_box_map, start_time=start_date)
+        
+        raw_data = mly.image.get_images_in_bbox_controller(
+          bounding_box = getMapillaryBbox(gh_urban), 
+          layer = 'image',
+          zoom = 14,
+          filters = {
+            'image_type': 'all',
+            #'min_captured_at': start_date,
+          }
+        )
+        raw_json = json.loads(raw_data)
+        #print(raw_json)
 
         # every feature is a sequence of pictues
         sequence_list = raw_json["features"]
 
         for feature in sequence_list:
-            image_keys = feature["properties"]["coordinateProperties"]["image_keys"]
-            coordinates= feature["geometry"]["coordinates"]
-            image_angles= feature["properties"]["coordinateProperties"]["cas"]
-            sequence_info=','.join([feature["properties"]["key"],feature["properties"]["captured_at"],str(feature["properties"]["pano"])])
-            if str(feature["properties"]["pano"]) == "False":
+            image_keys = [feature["properties"]["id"]]
+            coordinates = feature["geometry"]["coordinates"]
+            image_angles = feature["properties"]["compass_angle"]
+            sequence_info = ','.join([
+                str(feature["properties"]["sequence_id"]),
+                str(feature["properties"]["captured_at"]),
+                str(feature["properties"]["is_pano"])
+            ])
+            if str(feature["properties"]["is_pano"]) == "False":
                 i=register_entry(image_keys, coordinates, key_canton, i, image_resolution, image_angles, sequence_info)
 
         area_canton+=1
