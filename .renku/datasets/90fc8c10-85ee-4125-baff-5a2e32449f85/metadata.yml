@@ -1,0 +1,56 @@
+- '@id': https://renkulab.io/datasets/90fc8c10-85ee-4125-baff-5a2e32449f85
+  '@type':
+  - http://purl.org/wf4ever/wfprov#Artifact
+  - http://schema.org/Dataset
+  - http://www.w3.org/ns/prov#Entity
+  http://schema.org/alternateName:
+  - '@value': preproc-images-for-streetwise
+  http://schema.org/creator:
+  - '@id': mailto:oleg@datalets.ch
+  http://schema.org/dateCreated:
+  - '@value': '2022-02-17T09:45:41.986423+00:00'
+  http://schema.org/description:
+  - '@value': A collection of images sourced from Mapillary, which have been pre-processed
+      for training the Streetwise algorithm.
+  http://schema.org/hasPart: []
+  http://schema.org/identifier:
+  - '@value': 90fc8c10-85ee-4125-baff-5a2e32449f85
+  http://schema.org/isPartOf:
+  - '@id': https://renkulab.io/projects/oleg/streetwise
+  http://schema.org/keywords: []
+  http://schema.org/name:
+  - '@value': Preproc Images for Streetwise
+  http://schema.org/subjectOf: []
+  http://schema.org/url:
+  - '@value': https://renkulab.io/datasets/90fc8c10-85ee-4125-baff-5a2e32449f85
+  http://www.w3.org/2000/01/rdf-schema#label:
+  - '@value': 90fc8c10-85ee-4125-baff-5a2e32449f85
+  http://www.w3.org/ns/prov#atLocation:
+  - '@value': .renku/datasets/90fc8c10-85ee-4125-baff-5a2e32449f85
+- '@id': https://renkulab.io/projects/oleg/streetwise
+  '@type':
+  - http://schema.org/Project
+  - http://www.w3.org/ns/prov#Location
+  http://schema.org/agent:
+  - '@value': 0.12.1.dev0+dirty
+  http://schema.org/creator:
+  - '@id': mailto:oleg@datalets.ch
+  http://schema.org/dateCreated:
+  - '@value': '2020-03-03T10:08:16.332000+00:00'
+  http://schema.org/name:
+  - '@value': Streetwise
+  http://schema.org/schemaVersion:
+  - '@value': '8'
+  https://swissdatasciencecenter.github.io/renku-ontology#automatedTemplateUpdate:
+  - '@value': false
+  https://swissdatasciencecenter.github.io/renku-ontology#immutableTemplateFiles: []
+- '@id': mailto:oleg@datalets.ch
+  '@type':
+  - http://schema.org/Person
+  - http://www.w3.org/ns/prov#Person
+  http://schema.org/email:
+  - '@value': oleg@datalets.ch
+  http://schema.org/name:
+  - '@value': Oleg Lavrovsky
+  http://www.w3.org/2000/01/rdf-schema#label:
+  - '@value': Oleg Lavrovsky
