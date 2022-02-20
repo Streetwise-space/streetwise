@@ -1,4 +1,6 @@
-/models/
+/enhanced_preproc
+/models
+/output
 
 # Created by https://www.gitignore.io/api/macos,python,R,linux,vim,emacs,visualstudiocode,intellij
 # Edit at https://www.gitignore.io/?templates=macos,python,R,linux,vim,emacs,visualstudiocode,intellij
