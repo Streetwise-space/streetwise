@@ -1,0 +1,64 @@
+- '@id': https://renkulab.io/datasets/123679f4-3db0-47b9-b28b-bd0bdbc0fc0f
+  '@type':
+  - http://purl.org/wf4ever/wfprov#Artifact
+  - http://schema.org/Dataset
+  - http://www.w3.org/ns/prov#Entity
+  http://schema.org/alternateName:
+  - '@value': preproc-images-for-streetwise
+  http://schema.org/creator:
+  - '@id': mailto:oleg@datalets.ch
+  http://schema.org/dateCreated:
+  - '@value': '2022-02-20T20:53:47.976320+00:00'
+  http://schema.org/description:
+  - '@value': A collection of images sourced from Mapillary, which have been pre-processed
+      for training the Streetwise algorithm.
+  http://schema.org/hasPart: []
+  http://schema.org/identifier:
+  - '@value': 123679f4-3db0-47b9-b28b-bd0bdbc0fc0f
+  http://schema.org/image: []
+  http://schema.org/isPartOf:
+  - '@id': https://renkulab.io/projects/oleg/streetwise
+  http://schema.org/keywords: []
+  http://schema.org/name:
+  - '@value': Streetwise - Training set
+  http://schema.org/subjectOf: []
+  http://schema.org/url:
+  - '@value': https://renkulab.io/datasets/123679f4-3db0-47b9-b28b-bd0bdbc0fc0f
+  http://www.w3.org/2000/01/rdf-schema#label:
+  - '@value': 123679f4-3db0-47b9-b28b-bd0bdbc0fc0f
+  http://www.w3.org/ns/prov#atLocation:
+  - '@value': .renku/datasets/90fc8c10-85ee-4125-baff-5a2e32449f85
+  http://www.w3.org/ns/prov#wasDerivedFrom:
+  - '@id': https://renkulab.io/urls/%2F%2Frenkulab.io%2Fdatasets%2F90fc8c10-85ee-4125-baff-5a2e32449f85
+- '@id': https://renkulab.io/projects/oleg/streetwise
+  '@type':
+  - http://schema.org/Project
+  - http://www.w3.org/ns/prov#Location
+  http://schema.org/agent:
+  - '@value': 0.16.2
+  http://schema.org/creator:
+  - '@id': mailto:oleg@datalets.ch
+  http://schema.org/dateCreated:
+  - '@value': '2020-03-03T10:08:16.332000+00:00'
+  http://schema.org/name:
+  - '@value': Streetwise
+  http://schema.org/schemaVersion:
+  - '@value': '8'
+  https://swissdatasciencecenter.github.io/renku-ontology#automatedTemplateUpdate:
+  - '@value': false
+  https://swissdatasciencecenter.github.io/renku-ontology#immutableTemplateFiles: []
+- '@id': https://renkulab.io/urls/%2F%2Frenkulab.io%2Fdatasets%2F90fc8c10-85ee-4125-baff-5a2e32449f85
+  '@type':
+  - http://schema.org/URL
+  http://schema.org/url:
+  - '@id': https://renkulab.io/datasets/90fc8c10-85ee-4125-baff-5a2e32449f85
+- '@id': mailto:oleg@datalets.ch
+  '@type':
+  - http://schema.org/Person
+  - http://www.w3.org/ns/prov#Person
+  http://schema.org/email:
+  - '@value': oleg@datalets.ch
+  http://schema.org/name:
+  - '@value': Oleg Lavrovsky
+  http://www.w3.org/2000/01/rdf-schema#label:
+  - '@value': Oleg Lavrovsky
