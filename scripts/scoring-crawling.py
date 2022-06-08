@@ -1,6 +1,7 @@
 #!/bin/python3
 # -*- coding: utf-8 -*-
 from dotenv import load_dotenv
+from urllib.error import HTTPError
 
 import mapillary.interface as mly
 
@@ -10,8 +11,7 @@ import wget
 import json
 import libgeohash as gh
 import datetime
-import image_processing as imgp
-import pandas as pd
+
 
 load_dotenv()
 
@@ -22,12 +22,13 @@ OUTPUT_FOLDER = "../data/"
 key = os.getenv("MAPILLARY_KEY") # get access key from environment variable
 
 gh_cantons={
-  "SG":{"area_gh":"u0qt","suffix":["v3","v7","tx","ub","vu","su"]},
+    "ZZH":{"area_gh":"u0qj9", "suffix":["e", "s", "u0", "j1", "u1", "u4", "gc", "gf", "gg", "gu", "g6", "g3", "g9", "gd", "g8", "g2"]}
+  # "SG":{"area_gh":"u0qt","suffix":["v3","v7","tx","ub","vu","su"]},
   # "ZH":{"area_gh":"u0qj", "suffix":["d"]}
 }
 
-# We get images from 2015 onwards
-start_date = datetime.datetime(2015,1,1)
+# We get images from 2021 onwards
+start_date = datetime.datetime(2021,1,1)
 
 # In this resolution (256, 1024, and 2048 possible)
 image_resolution = 1024
@@ -42,14 +43,14 @@ def start_crawl(areas):
           gh_urban = gh_cantons[key_canton]["area_gh"] + gh_cantons[key_canton]["suffix"][area_canton]
           #gh_urban = geohash_compl[area_canton]
           print("Geohash query: %s" % gh_urban)
-          
+
           #gh_box_map=convertBBoxtoMapillary(gh_urban)
           #we query sequences because we don't want many similar images in one area
           # no limit is set as we want to query all images.
           #raw_json = map.search_sequences(bbox=gh_box_map, start_time=start_date)
-          
+
           raw_data = mly.image.get_images_in_bbox_controller(
-            bounding_box = getMapillaryBbox(gh_urban), 
+            bounding_box = getMapillaryBbox(gh_urban),
             layer = 'image',
             zoom = 14,
             # is_image = True,
@@ -67,7 +68,7 @@ def start_crawl(areas):
 
           # TODO: roll up into a single entry
           for feature in sequence_list:
-            if str(feature["properties"]["is_pano"]) != "False": 
+            if str(feature["properties"]["is_pano"]) != "False":
               # Skip panoramas
               continue
             image_keys = [feature["properties"]["id"]]
@@ -141,11 +142,11 @@ def register_entry(image_keys, coord_list, key_canton, i, ir, image_angles, sequ
             myfile = open(datapath, "a")
             image_name = str(image_keys[index_image]) + ".jpg"
             line=",".join([
-                str(image_keys[index_image]), 
-                key_canton, 
+                str(image_keys[index_image]),
+                key_canton,
                 str(coord_list[1]),
-                str(coord_list[0]), 
-                str(image_angles), 
+                str(coord_list[0]),
+                str(image_angles),
                 sequence_info+"\n"
             ])
             myfile.write(line)
@@ -174,18 +175,24 @@ def download_image_by_key(key, image_resolution=1024, download_path=None):
     """
     if os.path.isfile(download_path):
         return True
-    
-    #try:            
-    url = mly.image.get_image_thumbnail_controller(
-      image_id = key, 
-      resolution = image_resolution
-    )
-    #except:
-    #    return False
-    
+
+    try:
+        url = mly.image.get_image_thumbnail_controller(
+          image_id = key,
+          resolution = image_resolution
+        )
+    except:
+        print("Could not get thumbnail for %s" % key)
+        return False
+
     # Use the wget library to download the url
     print("Downloading ... %s" % key)
-    filename = wget.download(url, download_path)
+    try:
+        filename = wget.download(url, download_path)
+    except HTTPError as e:
+        print("Could not connect!", e)
+        return False
+
     return True
 
 

@@ -50,6 +50,8 @@ jupyterlab-pygments
 jupyterlab-server
 Keras-Preprocessing
 kiwisolver
+libgeohash
+mapillary
 Markdown
 MarkupSafe
 matplotlib
@@ -91,6 +93,7 @@ pyparsing
 pyrsistent
 PySocks
 python-dateutil
+python-dotenv
 pytz
 pyzmq
 requests
@@ -118,6 +121,7 @@ wcwidth
 webencodings
 websocket-client
 Werkzeug
+wget
 wrapt
 yarl
 zipp
