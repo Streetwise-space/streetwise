@@ -1,4 +1,4 @@
-- '@id': https://renkulab.io/datasets/8c6de915-c236-43a4-9310-eb5935529dff
+- '@id': https://renkulab.io/datasets/ac36111e-8cdc-47e3-9e58-cc5703de2d4c
   '@type':
   - http://purl.org/wf4ever/wfprov#Artifact
   - http://schema.org/Dataset
@@ -8,14 +8,14 @@
   http://schema.org/creator:
   - '@id': mailto:oleg@datalets.ch
   http://schema.org/dateCreated:
-  - '@value': '2022-02-20T22:26:45.952281+00:00'
+  - '@value': '2022-06-09T18:34:16.360757+00:00'
   http://schema.org/description:
   - '@value': A collection of images sourced from Mapillary, which have been pre-processed
-      for training the Streetwise algorithm. For R&D and training purposes only, see
-      https://www.mapillary.com/terms
+      for training the Streetwise algorithm. For R&D and training purposes only. Licensed
+      CC BY-SA - for details see https://www.mapillary.com/terms
   http://schema.org/hasPart: []
   http://schema.org/identifier:
-  - '@value': 8c6de915-c236-43a4-9310-eb5935529dff
+  - '@value': ac36111e-8cdc-47e3-9e58-cc5703de2d4c
   http://schema.org/image: []
   http://schema.org/isPartOf:
   - '@id': https://renkulab.io/projects/oleg/streetwise
@@ -24,13 +24,13 @@
   - '@value': Preproc Images for Streetwise
   http://schema.org/subjectOf: []
   http://schema.org/url:
-  - '@value': https://renkulab.io/datasets/8c6de915-c236-43a4-9310-eb5935529dff
+  - '@value': https://renkulab.io/datasets/ac36111e-8cdc-47e3-9e58-cc5703de2d4c
   http://www.w3.org/2000/01/rdf-schema#label:
-  - '@value': 8c6de915-c236-43a4-9310-eb5935529dff
+  - '@value': ac36111e-8cdc-47e3-9e58-cc5703de2d4c
   http://www.w3.org/ns/prov#atLocation:
   - '@value': .renku/datasets/90fc8c10-85ee-4125-baff-5a2e32449f85
   http://www.w3.org/ns/prov#wasDerivedFrom:
-  - '@id': https://renkulab.io/urls/%2F%2Frenkulab.io%2Fdatasets%2F02fb7db9-fd0d-40f3-84eb-f4d0441b51a1
+  - '@id': https://renkulab.io/urls/%2F%2Frenkulab.io%2Fdatasets%2F8c6de915-c236-43a4-9310-eb5935529dff
 - '@id': https://renkulab.io/projects/oleg/streetwise
   '@type':
   - http://schema.org/Project
@@ -48,11 +48,11 @@
   https://swissdatasciencecenter.github.io/renku-ontology#automatedTemplateUpdate:
   - '@value': false
   https://swissdatasciencecenter.github.io/renku-ontology#immutableTemplateFiles: []
-- '@id': https://renkulab.io/urls/%2F%2Frenkulab.io%2Fdatasets%2F02fb7db9-fd0d-40f3-84eb-f4d0441b51a1
+- '@id': https://renkulab.io/urls/%2F%2Frenkulab.io%2Fdatasets%2F8c6de915-c236-43a4-9310-eb5935529dff
   '@type':
   - http://schema.org/URL
   http://schema.org/url:
-  - '@id': https://renkulab.io/datasets/02fb7db9-fd0d-40f3-84eb-f4d0441b51a1
+  - '@id': https://renkulab.io/datasets/8c6de915-c236-43a4-9310-eb5935529dff
 - '@id': mailto:oleg@datalets.ch
   '@type':
   - http://schema.org/Person
