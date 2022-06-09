@@ -1,4 +1,4 @@
-FROM renku/renkulab-cuda-tf:11.0-tf-2.4-15f091e
+FROM renku/renkulab-cuda-tf
 # Uncomment and adapt if code is to be included in the image
 # COPY src /code/src
 

@@ -8,6 +8,8 @@ Data sources are required in the following folders:
 - **models** - trained model in `.h5` format
 - **data** - a `scoring.csv` with corresponding `images/*.jpg`
 
+This collection of images of Switzerland sourced from Mapillary have been pre-processed for training the Streetwise algorithm, are available from our team for R&D and training purposes only. Licensed CC BY-SA - for further details see https://www.mapillary.com/terms
+
 In additional to the `data` folder, you may wish [to download](https://streetwise.eu-central-1.linodeobjects.com/models.zip) an extract a `models` folder into the root in order to start with pre-trained networks. Alternatively, the code used to train the networks can be found in ```scripts/NN-training.py```.
 
 ## Background
