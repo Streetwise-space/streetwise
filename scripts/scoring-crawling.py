@@ -18,6 +18,7 @@ load_dotenv()
 ##*****************Configuration ***************
 
 OUTPUT_FOLDER = "../data/"
+IMAGES_FOLDER = "../data/images/"
 
 key = os.getenv("MAPILLARY_KEY") # get access key from environment variable
 
@@ -136,7 +137,8 @@ def register_entry(image_keys, coord_list, key_canton, i, ir, image_angles, sequ
     datapath = os.path.join(OUTPUT_FOLDER, "scoring.csv")
     index_image = 0
     while index_image < len(image_keys):
-        filepath = os.path.join(OUTPUT_FOLDER, str(image_keys[index_image]) + ".jpg")
+        print("Collecting image %d / %d" % (index_image, len(image_keys)))
+        filepath = os.path.join(IMAGES_FOLDER, str(image_keys[index_image]) + ".jpg")
         flag = download_image_by_key(image_keys[index_image], ir, filepath)
         if flag:
             myfile = open(datapath, "a")
@@ -174,6 +176,7 @@ def download_image_by_key(key, image_resolution=1024, download_path=None):
 
     """
     if os.path.isfile(download_path):
+        # Do not download again
         return True
 
     try:
