@@ -1,9 +1,3 @@
-dotenv
-libgeohash
-mapillary
 numpy
 opencv-python
-Pillow
 trueskill
-urllib3
-wget
